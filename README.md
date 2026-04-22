@@ -1,0 +1,2 @@
+# djangotr
+django trainning
