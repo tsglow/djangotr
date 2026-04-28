@@ -40,13 +40,12 @@ def num_redirect(request, month):
         return HttpResponseNotFound("that's not a month")
 
 
-def mon_challenge(request, month):    
-    #try: 
-    res = list(filter(lambda i : i['month'] == month, challenges))[0]['challenge']
-    # response_data = f"<h1>{res}</h1>"
-    response_data = render_to_string("challenges/challenges.html")
-    return HttpResponse(response_data)
+def mon_challenge(request, month):        
+    #try:
+    t_month = list(filter(lambda i : i['month'] == month or i['month'][0:3] == month, challenges))[0]    
+    context = {
+        'month': t_month['month'],
+        'ch': t_month['challenge']}    
+    return render(request, "challenges/challenges.html", context)       
     #except:
-        #return HttpResponseNotFound("<h1>that's not a month</h1>")
-    
-        
+        #return HttpResponseNotFound("that's not a month")
