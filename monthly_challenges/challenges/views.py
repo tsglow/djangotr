@@ -20,11 +20,13 @@ challenges = [
     ]
 
 def index(request):
-    link = ""
+    link = "<ul>"
     for m in challenges:
-        link = link + f'<a href="{reverse("month-challenge", args=[m['month']])}">{m["month"]}</a><br/>'
+        link += f'<li><a href="{reverse("month-challenge", args=[m['month']])}">{m["month"]}</a></li>'
     print(link)
+    link += "</ul>"
     return HttpResponse(link)
+
 
 def num_redirect(request, month):        
     try: 
