@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -40,11 +41,12 @@ def num_redirect(request, month):
 
 
 def mon_challenge(request, month):    
-    try: 
-        res = list(filter(lambda i : i['month'] == month, challenges))[0]['challenge']
-        response_data = f"<h1>{res}</h1>"
-        return HttpResponse(response_data)
-    except:
-        return HttpResponseNotFound("<h1>that's not a month</h1>")
+    #try: 
+    res = list(filter(lambda i : i['month'] == month, challenges))[0]['challenge']
+    # response_data = f"<h1>{res}</h1>"
+    response_data = render_to_string("challenges/challenges.html")
+    return HttpResponse(response_data)
+    #except:
+        #return HttpResponseNotFound("<h1>that's not a month</h1>")
     
         
