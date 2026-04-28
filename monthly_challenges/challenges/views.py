@@ -41,11 +41,11 @@ def num_redirect(request, month):
 
 
 def mon_challenge(request, month):        
-    #try:
-    t_month = list(filter(lambda i : i['month'] == month or i['month'][0:3] == month, challenges))[0]    
-    context = {
-        'month': t_month['month'],
-        'ch': t_month['challenge']}    
-    return render(request, "challenges/challenges.html", context)       
-    #except:
-        #return HttpResponseNotFound("that's not a month")
+    try:
+        t_month = list(filter(lambda i : i['month'] == month or i['month'][0:3] == month, challenges))[0]    
+        context = {
+            'month': t_month['month'],
+            'ch': t_month['challenge']}    
+        return render(request, "challenges/challenges.html", context)       
+    except:
+        return HttpResponseNotFound("that's not a month")
