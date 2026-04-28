@@ -19,6 +19,13 @@ challenges = [
         {'month': 'december', 'challenge': "merry christmas"},
     ]
 
+def index(request):
+    link = ""
+    for m in challenges:
+        link = link + f'<a href="{reverse("month-challenge", args=[m['month']])}">{m["month"]}</a><br/>'
+    print(link)
+    return HttpResponse(link)
+
 def num_redirect(request, month):        
     try: 
         forward_month = challenges[month - 1]['month'] 
@@ -33,8 +40,9 @@ def num_redirect(request, month):
 def mon_challenge(request, month):    
     try: 
         res = list(filter(lambda i : i['month'] == month, challenges))[0]['challenge']
-        return HttpResponse(res)
+        response_data = f"<h1>{res}</h1>"
+        return HttpResponse(response_data)
     except:
-        return HttpResponseNotFound("that's not a month")
+        return HttpResponseNotFound("<h1>that's not a month</h1>")
     
         
