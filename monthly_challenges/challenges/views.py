@@ -9,7 +9,7 @@ challenges = [
         {'month': 'january', 'challenge': "let's go to work"},
         {'month': 'feburary', 'challenge': "do swim"},
         {'month': 'march', 'challenge': "let's practice django every day"},
-        {'month': 'april', 'challenge': "go to cycle"},
+        {'month': 'april', 'challenge': "none"},
         {'month': 'may', 'challenge': "around the mountain"},
         {'month': 'june', 'challenge': "draw something"},
         {'month': 'july', 'challenge': "no vacation"},
@@ -19,7 +19,7 @@ challenges = [
         {'month': 'november', 'challenge': "last dance for running"},
         {'month': 'december', 'challenge': "merry christmas"},
     ]
-
+'''
 def index(request):
     link = "<ul>"
     for m in challenges:
@@ -27,6 +27,11 @@ def index(request):
     print(link)
     link += "</ul>"
     return HttpResponse(link)
+'''
+
+def index(request):
+    re_path = reverse("month-challenge", args=["january"])               
+    return render(request, "challenges/index.html", {'challenges': challenges, 'path': re_path[:-7]})
 
 
 def num_redirect(request, month):        
