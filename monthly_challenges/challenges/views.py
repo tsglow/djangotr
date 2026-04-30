@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
 # Create your views here.
@@ -42,7 +42,8 @@ def num_redirect(request, month):
         print(re_path)
         return HttpResponseRedirect(re_path)
     except:
-        return HttpResponseNotFound("that's not a month")
+        response_data = render_to_string("404.html")
+        raise Http404()
 
 
 def mon_challenge(request, month):        
@@ -53,4 +54,5 @@ def mon_challenge(request, month):
             'ch': t_month['challenge']}    
         return render(request, "challenges/challenges.html", context)       
     except:
-        return HttpResponseNotFound("that's not a month")
+        response_data = render_to_string("404.html")
+        raise Http404()

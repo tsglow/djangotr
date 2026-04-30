@@ -6,9 +6,8 @@
   
 
     {% block content %}
-        {% include "challenges/includes/header.html" %}     
-        
-        <h1>{{ month }}</h1>
+        {% include "challenges/includes/header.html" with location=month %}             
+
         {% if ch == "none"  %}
             <h2> there is no challenge </h2>
         {% else %}
