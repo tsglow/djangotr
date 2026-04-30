@@ -37,12 +37,11 @@ def index(request):
 def num_redirect(request, month):        
     try: 
         forward_month = challenges[month - 1]['month'] 
-        print(forward_month)
+        # print(forward_month)
         re_path = reverse("month-challenge", args=[forward_month])
-        print(re_path)
+        # print(re_path)
         return HttpResponseRedirect(re_path)
-    except:
-        response_data = render_to_string("404.html")
+    except:        
         raise Http404()
 
 
@@ -53,6 +52,5 @@ def mon_challenge(request, month):
             'month': t_month['month'],
             'ch': t_month['challenge']}    
         return render(request, "challenges/challenges.html", context)       
-    except:
-        response_data = render_to_string("404.html")
+    except:        
         raise Http404()
